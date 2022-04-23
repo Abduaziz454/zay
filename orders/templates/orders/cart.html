@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-8">
+            <table class="table table-dark">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Продукт</th>
+                <th scope="col">Кол-во</th>
+                <th scope="col">Общая стоимость</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cart_product in cart_products %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td class="d-flex align-items-center">
+                    <img src="{{ cart_product.product.image.url }}" height="200" alt="">
+                    <div style="margin-left: 30px;">
+                        <h2>{{ cart_product.product.title }}</h2>
+                        <p>{{ cart_product.product.description }}</p>
+                    </div>
+                </td>
+                <td>{{ cart_product.total_products }}</td>
+                <td>{{ cart_product.total_price }}$</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">Общее кол-во товаров: </td>
+                    <td colspan="2">{{ cart.final_products }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Общая стоимость: </td>
+                    <td colspan="2">{{ cart.final_price }}$</td>
+                </tr>
+            </tfoot>
+        </table>
+        </div>
+        <div class="col-4">
+            <h2>Форма заказа</h2>
+            <form action="{% url 'make_order' %}" method="post">
+                {% csrf_token %}
+                {{ order_form|crispy }}
+                <button class="btn btn-success" type="submit">Оформить заказ</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock main %}
