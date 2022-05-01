@@ -44,9 +44,9 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(max_length=100, label="Имя пользователя",
+    username = forms.CharField(max_length=100, label="Username",
                                widget=forms.TextInput(attrs={"class": "form-control"}))
-    password = forms.CharField(label="Пароль",
+    password = forms.CharField(label="Password",
                                widget=forms.PasswordInput(attrs={
                                    "class": "form-control",
                                    "autocomplete": "new-password"

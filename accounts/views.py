@@ -38,7 +38,7 @@ class UserRegisterView(CreateView):
 
     def render_to_response(self, context, **response_kwargs):
         messages.error(self.request, "Error Register !")
-        return redirect("user_auth")
+        return redirect("register")
 
     def get_success_url(self):
         messages.success(self.request, "Registration has been successfull !")

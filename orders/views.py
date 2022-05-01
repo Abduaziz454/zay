@@ -22,7 +22,7 @@ class CartMixin(View):
                 if not self.cart:
                     self.cart = Carts.objects.create(owner=self.customer)
                 return super(CartMixin, self).dispatch(request, *args, **kwargs)
-        messages.error(request, "Сначала нужно авторизоваться !")
+        messages.error(request, "You have get authorisation first of all!")
         return redirect("user_auth")
 
 
